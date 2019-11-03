@@ -6,9 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StoreRepository extends JpaRepository<StoreEntity, Long> {
-//
-//    List<StoreEntity> findAllStoreEntities();
-//
-//    StoreEntity getStoreEntityById(Long storeId);
 
 }

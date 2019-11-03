@@ -1,9 +1,12 @@
 package com.project.retail.service;
 
+import com.project.retail.domain.StoreEntity;
 import com.project.retail.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -18,6 +21,8 @@ public class StoreService {
      * @return store created
      */
     public String create(String storeRequest) {
+        StoreEntity storeEntity = StoreEntity.builder().storeName(storeRequest).build();
+        repo.save(storeEntity);
         return "creating a store by storeRequest name " + storeRequest;
     }
 
@@ -28,7 +33,12 @@ public class StoreService {
      * @return list of stores
      */
     public String getStoreList() {
-        return "get StoreEntity list";
+        List<StoreEntity> res = repo.findAll();
+        StringBuilder sb = new StringBuilder();
+        for (StoreEntity se : res) {
+            sb.append(se.getStoreName()).append("/n");
+        }
+        return sb.toString();
     }
 
     /**
@@ -38,6 +48,6 @@ public class StoreService {
      * @return store
      */
     public String getStoreById(Long storeId) {
-        return "get store info by Id = " + storeId;
+        return repo.getOne(storeId).getStoreName();
     }
 }
