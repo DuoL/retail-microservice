@@ -9,8 +9,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.util.Objects;
 
@@ -22,6 +25,7 @@ import java.util.Objects;
 @ApiModel("stock")
 public class StockEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "stock_id")
     private Long stockId;
 
@@ -32,7 +36,7 @@ public class StockEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private StoreEntity store;
 

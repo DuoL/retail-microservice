@@ -1,6 +1,5 @@
 package com.project.retail.dto.request;
 
-import com.project.retail.dto.Product;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -19,15 +18,19 @@ import java.util.List;
 @ApiModel("OrderRequest")
 public class OrderRequest {
 
+    @ApiModelProperty(value = "The order Id", readOnly = true)
+    private Long orderId;
+
     @NotNull
     @ApiModelProperty(value = "The store Id", readOnly = true)
-    private long storeId;
+    private Long storeId;
 
     @ApiModelProperty(value = "date/time of the request")
     private Instant orderDate;
 
+    @NotNull
     @ApiModelProperty(value = "one or more products purchased")
-    private List<Product> productList;
+    private List<ProductRequest> productList;
 
     @NotNull
     @ApiModelProperty(value = "first name")
@@ -37,7 +40,6 @@ public class OrderRequest {
     @ApiModelProperty(value = "last name")
     private String lastName;
 
-    @NotNull
     @ApiModelProperty(value = "email")
     private String email;
 

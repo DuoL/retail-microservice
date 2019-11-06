@@ -15,6 +15,10 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @ApiModel("RequestStock")
 public class StockRequest {
+
+    @ApiModelProperty(value = "stock id")
+    private Long stockId;
+
     @NotNull
     @ApiModelProperty(value = "store id")
     private Long storeId;
@@ -23,6 +27,7 @@ public class StockRequest {
     @ApiModelProperty(value = "product id")
     private Long productId;
 
+    @NotNull
     @ApiModelProperty(value = "count")
     private Long count;
 }

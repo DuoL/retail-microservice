@@ -14,6 +14,10 @@ import lombok.NoArgsConstructor;
 @ApiModel("Stock")
 
 public class Stock {
+
+    @ApiModelProperty(value = "The stock Id", readOnly = true)
+    private Long stockId;
+
     @ApiModelProperty(value = "The product Id", readOnly = true)
     private Long productId;
 

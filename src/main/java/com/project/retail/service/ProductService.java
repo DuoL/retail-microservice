@@ -1,10 +1,16 @@
 package com.project.retail.service;
 
+import com.project.retail.domain.ProductEntity;
+import com.project.retail.domain.StoreEntity;
+import com.project.retail.dto.Product;
+import com.project.retail.dto.request.ProductRequest;
+import com.project.retail.function.ProductConverter;
 import com.project.retail.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -12,6 +18,9 @@ import org.springframework.stereotype.Service;
 public class ProductService {
 
     private final ProductRepository repo;
+    private final StoreService storeService;
+    private final ProductConverter productConverter;
+    private final OrderService orderService;
 
     /**
      * Creates a product
@@ -19,8 +28,10 @@ public class ProductService {
      * @param storeId to  create a product
      * @return product created
      */
-    public String create( Long storeId) {
-        return "creating product for this store " + storeId;
+    public Product create(Long storeId, ProductRequest productRequest) {
+        StoreEntity storeEntity = storeService.getStoreEntityById(storeId);
+        ProductEntity productEntity = productConverter.toEntity(productRequest, storeEntity, null);
+        return productConverter.toDto(repo.save(productEntity));
     }
 
     /**
@@ -29,18 +40,27 @@ public class ProductService {
      * @param storeId
      * @return a list of products
      */
-    public String getProductListByStoreId(Pageable pageable, Long storeId) {
-       // TO do find it by store Id
-        return "getting product List by storeId " + storeId;
+    public List<Product> getProductListByStoreId(Long storeId) {
+        return storeService.getStoreById(storeId).getProductList();
     }
 
     /**
      * Get the product by its storeId
-     *
-     * @param storeId
+     * @param productId
      * @return product info
      */
-    public String getProductById(Long storeId, Long productId) {
-        return "getting " + productId + " product info by storeId " + storeId;
+    public Product getProductById(Long productId) {
+        return productConverter.toDto(repo.getOne(productId));
+    }
+
+
+    /**
+     * Get the productEntity based on id
+     *
+     * @param productId
+     * @return productEntity
+     */
+    public ProductEntity getProductEntityById(Long productId) {
+        return repo.getOne(productId);
     }
 }

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @Builder
@@ -20,4 +21,10 @@ public class StoreRequest {
     @ApiModelProperty(value = "The store name")
     @NotNull
     private String storeName;
+
+    @ApiModelProperty(value = "The store id")
+    private Long storeId;
+
+    @ApiModelProperty(value = "The products of a store")
+    private List<ProductRequest> productList;
 }

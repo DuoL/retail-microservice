@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Store {
     @ApiModelProperty(value = "The store id", readOnly = true)
-    private long storeId;
+    private Long storeId;
 
     @ApiModelProperty(value = "The store name")
     private String storeName;

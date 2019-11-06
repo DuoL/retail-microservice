@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -26,15 +28,29 @@ public class StoreEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "store_id")
-    private long storeId;
+    private Long storeId;
 
+    @NotNull
     @Column(name = "store_name")
     private String storeName;
 
     @OneToMany(mappedBy = "store", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<ProductEntity> products;
 
-    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<OrderEntity> orders;
+    @OneToMany(mappedBy = "store")
+    private Set<OrderEntity> orderList;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StoreEntity that = (StoreEntity) o;
+        return storeId == that.storeId;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(storeId);
+    }
 }

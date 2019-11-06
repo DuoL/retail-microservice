@@ -29,6 +29,7 @@ CREATE TABLE stock
 CREATE TABLE order
 (
   order_id      BIGINT(20)      NOT NULL    AUTO_INCREMENT  COMMENT 'Auto increment generated',
+  product_id    BIGINT(20)      NOT NULL                    COMMENT 'Foreign Key',
   store_id      BIGINT(20)      NOT NULL                    COMMENT 'Foreign key',
   order_date    DATETIME        NOT NULL                    DEFAULT CURRENT_TIMESTAMP COMMENT 'order date',
   first_name    VARCHAR(128)    NOT NULL                    COMMENT 'first name',

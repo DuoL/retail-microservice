@@ -21,6 +21,12 @@ public class ProductRequest {
     @ApiModelProperty(value = "store id")
     private Long storeId;
 
+    @ApiModelProperty(value = "order id")
+    private Long orderId;
+
+    @ApiModelProperty(value = "product id")
+    private Long productId;
+
     @NotNull
     @ApiModelProperty(value = "product name")
     private String productName;

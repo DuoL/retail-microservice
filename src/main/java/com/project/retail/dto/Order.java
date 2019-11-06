@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Order {
     @ApiModelProperty(value = "The request Id", readOnly = true)
-    private long orderId;
+    private Long orderId;
 
     @ApiModelProperty(value = "The store Id", readOnly = true)
     private long storeId;
