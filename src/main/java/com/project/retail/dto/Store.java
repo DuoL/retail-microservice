@@ -25,4 +25,7 @@ public class Store {
     @ApiModelProperty(value = "A list of products")
     private List<Product> productList;
 
+    @ApiModelProperty(value = "A list of products")
+    private List<Order> orderList;
+
 }

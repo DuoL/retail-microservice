@@ -1,6 +1,5 @@
 package com.project.retail.domain;
 
-import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -24,7 +24,7 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel("product")
+@Table(name = "retail_product")
 public class ProductEntity {
     @Id
     @Column(name = "product_id")
@@ -42,6 +42,9 @@ public class ProductEntity {
     @Size(min = 5, max = 10, message = "allowing only alpha-numeric with a min length of 5 and max of 10")
     private String sku;
 
+//    @Column(name = "status")
+//    private ProductStatus status;
+
     @NotNull
     @Column(name = "price")
     private BigDecimal price;
@@ -52,10 +55,6 @@ public class ProductEntity {
     @ManyToOne
     @JoinColumn(name = "store_id")
     private StoreEntity store;
-
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private OrderEntity order;
 
     @Override
     public boolean equals(Object o) {

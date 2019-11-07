@@ -27,7 +27,7 @@ public class Order {
     private Instant orderDate;
 
     @ApiModelProperty(value = "one or more products purchased")
-    private List<Product> productList;
+    private List<OrderedProduct> orderedProductList;
 
     @ApiModelProperty(value = "first name")
     private String firstName;

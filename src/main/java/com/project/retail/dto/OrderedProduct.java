@@ -11,16 +11,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel("Stock")
-
-public class Stock {
-
-    @ApiModelProperty(value = "The stock Id", readOnly = true)
-    private Long stockId;
-
+@ApiModel("Product")
+public class OrderedProduct {
     @ApiModelProperty(value = "The product Id", readOnly = true)
     private Long productId;
 
-    @ApiModelProperty(value = "the total count in stock")
+    @ApiModelProperty(value = "The product name")
+    private String productName;
+
+    @ApiModelProperty("count")
     private Long count;
 }

@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Api(value = "Retail stock API", description = "API that contains stock related endpoints")
 @RestController("stockControllerV1")
-@RequestMapping("/retail/v1/stock")
+@RequestMapping(StockController.COLLECTION_PATH)
 @RequiredArgsConstructor
 public class StockController {
+
     private final StockService stockService;
+    public static final String COLLECTION_PATH = "/retail/v1/stock";
 
     @ApiOperation(value = "Add/Update stock")
     @ApiResponses(value = {

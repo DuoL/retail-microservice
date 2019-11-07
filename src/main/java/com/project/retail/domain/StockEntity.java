@@ -1,6 +1,5 @@
 package com.project.retail.domain;
 
-import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
@@ -22,7 +22,7 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel("stock")
+@Table(name = "retail_stock")
 public class StockEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

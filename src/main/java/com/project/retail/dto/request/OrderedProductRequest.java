@@ -8,23 +8,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel("StoreRequest")
-
-public class StoreRequest {
+@ApiModel("OrderedProductRequest")
+public class OrderedProductRequest {
+    @NotNull
+    @ApiModelProperty(value = "product id")
+    private Long productId;
 
     @NotNull
-    @ApiModelProperty(value = "The store name")
-    private String storeName;
-
-    @ApiModelProperty(value = "The store id")
-    private Long storeId;
-
-    @ApiModelProperty(value = "The products of a store")
-    private List<ProductRequest> productList;
+    @ApiModelProperty(value = "count")
+    private Long count;
 }

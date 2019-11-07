@@ -30,7 +30,7 @@ public class OrderRequest {
 
     @NotNull
     @ApiModelProperty(value = "one or more products purchased")
-    private List<ProductRequest> productList;
+    private List<OrderedProductRequest> orderedProductRequestList;
 
     @NotNull
     @ApiModelProperty(value = "first name")

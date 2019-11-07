@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Api(value = "Retail request API", description = "API that contains request related endpoints")
 @RestController("orderControllerV1")
-@RequestMapping("/retail/v1/orders")
+@RequestMapping(OrderController.COLLECTION_PATH)
 @RequiredArgsConstructor
 public class OrderController {
+
     private final OrderService orderService;
+    public static final String COLLECTION_PATH = "/retail/v1/orders";
 
     @ApiOperation(value = "create an request")
     @ApiResponses(value = {

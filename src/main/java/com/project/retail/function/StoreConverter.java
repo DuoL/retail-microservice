@@ -2,6 +2,7 @@ package com.project.retail.function;
 
 import com.project.retail.domain.ProductEntity;
 import com.project.retail.domain.StoreEntity;
+import com.project.retail.dto.Order;
 import com.project.retail.dto.Product;
 import com.project.retail.dto.Store;
 import com.project.retail.dto.request.StoreRequest;
@@ -25,6 +26,7 @@ public class StoreConverter {
         result.setStoreId(storeEntity.getStoreId());
         result.setStoreName(storeEntity.getStoreName());
         result.setProductList(getProducts(storeEntity));
+        result.setOrderList(getOrders(storeEntity));
         return result;
     }
 
@@ -43,28 +45,11 @@ public class StoreConverter {
         if (hasProduct) {
             request.getProductList().forEach(x -> {
                 existingProducts.add(
-                        productConverter.toEntity(x, storeEntity, null)
+                        productConverter.toEntity(x, storeEntity)
                 );
             });
         }
         return existingProducts;
-
-        /** Update logic if needed **/
-//        Set<ProductEntity> existingProducts = storeEntity.getProducts() != null ? storeEntity.getProducts() : new HashSet<>();
-//                if (x.getProductId() != null) {
-//                    existingProducts
-//                            .stream()
-//                            .filter(y -> x.getProductId().equals(y.getProductId()))
-//                            .findFirst()
-//                            .ifPresent(y -> {
-//                                y.setDescription(x.getDescription());
-//                                y.setProductName(x.getProductName());
-//                                y.setPrice(x.getPrice());
-//                                y.setSku(x.getSku());
-//                            });
-//                } else {
-//
-//                }
     }
 
     private List<Product> getProducts(StoreEntity entity) {
@@ -75,18 +60,13 @@ public class StoreConverter {
         return result;
     }
 
-
-    /** Update logic if needed **/
-//    Set<OrderEntity> existingOrders = entity.getOrders() != null ? entity.getOrders() : new HashSet<>();
-//    if(x.getOrderId() != null) {
-//        System.out.println("runs to if " + x.toString());
-//        existingOrders
-//                .stream()
-//                .filter(y -> x.getOrderId().equals(y.getOrderId()))
-//                .findFirst()
-//                .ifPresent(y -> {
-//                    orderConverter.toEntity(x, entity);
-//                });
-//
-//    } else {
+    private List<Order> getOrders(StoreEntity storeEntity) {
+        List<Order> result = new ArrayList<>();
+        if (storeEntity.getOrders() != null) {
+            storeEntity.getOrders().forEach(x -> {
+                result.add(orderConverter.toDto(x));
+            });
+        }
+        return result;
+    }
 }

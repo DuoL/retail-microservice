@@ -17,17 +17,18 @@ import java.math.BigDecimal;
 @ApiModel("Product")
 
 public class Product {
+
     @ApiModelProperty(value = "The product Id", readOnly = true)
     private Long productId;
 
     @ApiModelProperty(value = "The store Id", readOnly = true)
     private Long storeId;
 
-    @ApiModelProperty(value = "The order Id", readOnly = true)
-    private Long orderId;
-
     @ApiModelProperty(value = "The product name")
     private String productName;
+
+//    @ApiModelProperty(value = "The status of the product")
+//    private ProductStatus status;
 
     @ApiModelProperty(value = "The description of the item")
     private String description;

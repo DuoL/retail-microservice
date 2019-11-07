@@ -1,6 +1,5 @@
 package com.project.retail.domain;
 
-import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Set;
@@ -25,7 +25,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel("order")
+@Table(name = "retail_order")
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,9 +34,6 @@ public class OrderEntity {
 
     @Column(name = "order_date")
     private Instant orderDate;
-
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-    private Set<ProductEntity> productList;
 
     @Column(name = "first_name")
     private String firstName;
@@ -48,12 +45,14 @@ public class OrderEntity {
     private String email;
 
     @Column(name = "phone")
-
     private String phone;
 
     @ManyToOne
     @JoinColumn(name = "store_id")
     private StoreEntity store;
+
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<OrderedProductEntity> orderedProductEntitySet;
 
     @Override
     public boolean equals(Object o) {

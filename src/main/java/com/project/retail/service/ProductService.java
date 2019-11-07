@@ -20,7 +20,6 @@ public class ProductService {
     private final ProductRepository repo;
     private final StoreService storeService;
     private final ProductConverter productConverter;
-    private final OrderService orderService;
 
     /**
      * Creates a product
@@ -30,7 +29,7 @@ public class ProductService {
      */
     public Product create(Long storeId, ProductRequest productRequest) {
         StoreEntity storeEntity = storeService.getStoreEntityById(storeId);
-        ProductEntity productEntity = productConverter.toEntity(productRequest, storeEntity, null);
+        ProductEntity productEntity = productConverter.toEntity(productRequest, storeEntity);
         return productConverter.toDto(repo.save(productEntity));
     }
 

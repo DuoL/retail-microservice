@@ -1,6 +1,5 @@
 package com.project.retail.function;
 
-import com.project.retail.domain.OrderEntity;
 import com.project.retail.domain.ProductEntity;
 import com.project.retail.domain.StoreEntity;
 import com.project.retail.dto.Product;
@@ -13,9 +12,6 @@ import org.springframework.stereotype.Component;
 public class ProductConverter {
     public Product toDto(ProductEntity productEntity) {
         Product result = new Product();
-        if (productEntity.getOrder() != null) {
-            result.setOrderId(productEntity.getOrder().getOrderId());
-        }
         result.setDescription(productEntity.getDescription());
         result.setPrice(productEntity.getPrice());
         result.setProductId(productEntity.getProductId());
@@ -27,8 +23,7 @@ public class ProductConverter {
 
     public ProductEntity toEntity(
             ProductRequest productRequest,
-            StoreEntity storeEntity,
-            OrderEntity orderEntity) {
+            StoreEntity storeEntity) {
         ProductEntity productEntity = ProductEntity
                 .builder()
                 .productName(productRequest.getProductName())
@@ -36,7 +31,6 @@ public class ProductConverter {
                 .price(productRequest.getPrice())
                 .sku(productRequest.getSku())
                 .store(storeEntity)
-                .order(orderEntity)
                 .build();
         if (productRequest.getProductId() != null) {
             productEntity.setProductId(productRequest.getProductId());

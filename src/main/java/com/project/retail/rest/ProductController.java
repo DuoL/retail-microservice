@@ -23,11 +23,12 @@ import java.util.List;
 @Slf4j
 @Api(value = "Product Management API", description = "API that contains product management")
 @RestController("productControllerV1")
-@RequestMapping("/retail/v1/products")
+@RequestMapping(ProductController.COLLECTION_PATH)
 @RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
+    public static final String COLLECTION_PATH = "/retail/v1/products";
 
     @ApiOperation(value = "Create product")
     @ApiResponses(value = {

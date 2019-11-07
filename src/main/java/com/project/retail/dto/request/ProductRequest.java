@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @ApiModel("ProductRequest")
 public class ProductRequest {
+
     @NotNull
     @ApiModelProperty(value = "store id")
     private Long storeId;
@@ -30,6 +31,9 @@ public class ProductRequest {
     @NotNull
     @ApiModelProperty(value = "product name")
     private String productName;
+
+//    @ApiModelProperty(value = "The status of the product")
+//    private ProductStatus status;
 
     @ApiModelProperty(value = "description of the item")
     private String description;

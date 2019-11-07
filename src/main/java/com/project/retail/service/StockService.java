@@ -27,30 +27,30 @@ public class StockService {
      * @param productId
      */
     public Stock addOrUpdateStock(Long storeId, Long productId, StockRequest stockRequest) {
-        StockEntity existingStockEntity = getStockEntityByStoreIdAndProductId(storeId, productId);
-        if (existingStockEntity != null) {
-            return updateStock(existingStockEntity, stockRequest);
+        Long stockId = stockRequest.getStockId();
+        if (stockId != null && repo.getOne(stockId) != null) {
+            return updateStock(stockId, stockRequest);
         }
         return addStock(storeId, productId, stockRequest);
     }
 
 
     private Stock addStock(Long storeId, Long productId, StockRequest stockRequest) {
-        ProductEntity productEntity = productService.getProductEntityById(productId);
         StoreEntity storeEntity = storeService.getStoreEntityById(storeId);
-        return stockConverter.toDto(
-                repo.save(stockConverter.toEntity(stockRequest, productEntity, storeEntity))
-        );
-    }
-
-    private Stock updateStock(StockEntity stockEntity, StockRequest stockRequest) {
-        stockEntity.setCount(stockRequest.getCount());
+        ProductEntity productEntity = productService.getProductEntityById(productId);
+        StockEntity stockEntity = stockConverter.toEntity(stockRequest);
+        stockEntity.setStore(storeEntity);
+        stockEntity.setProduct(productEntity);
         return stockConverter.toDto(
                 repo.save(stockEntity)
         );
     }
 
-    public StockEntity getStockEntityByStoreIdAndProductId(Long storeId, Long productId) {
-        return repo.getStockEntityByStoreAndProduct(storeId, productId);
+    private Stock updateStock(Long stockId, StockRequest stockRequest) {
+        StockEntity stockEntity = repo.getOne(stockId);
+        stockEntity.setCount(stockRequest.getCount());
+        return stockConverter.toDto(
+                repo.save(stockEntity)
+        );
     }
 }

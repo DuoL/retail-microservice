@@ -23,7 +23,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "store")
+@Table(name = "retail_store")
 public class StoreEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,8 +37,8 @@ public class StoreEntity {
     @OneToMany(mappedBy = "store", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<ProductEntity> products;
 
-    @OneToMany(mappedBy = "store")
-    private Set<OrderEntity> orderList;
+    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<OrderEntity> orders;
 
     @Override
     public boolean equals(Object o) {

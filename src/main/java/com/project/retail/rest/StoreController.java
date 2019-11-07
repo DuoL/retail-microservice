@@ -23,12 +23,14 @@ import java.util.List;
 @Slf4j
 @Api(value = "Retail store API", description = "API that contains store related endpoints")
 @RestController("storeControllerV1")
-@RequestMapping("/retail/v1/stores")
+@RequestMapping(StoreController.COLLECTION_PATH)
 @RequiredArgsConstructor
 public class StoreController {
-    private final StoreService storeService;
 
-    @ApiOperation(value = "Create store")
+    private final StoreService storeService;
+    public static final String COLLECTION_PATH = "/retail/v1/stores";
+
+    @ApiOperation(value = "Create a store")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful creation of store"),
             @ApiResponse(code = 412, message = "Precondition failure"),
