@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,10 +62,10 @@ public class StoreService {
      * @return storeEntity
      */
     public StoreEntity getStoreEntityById(Long storeId) {
-        StoreEntity existingEntity = repo.getOne(storeId);
-        if (existingEntity == null) {
-            throw new NoSuchElementException(String.format("Not found this store with this ID", storeId));
-        }
-        return existingEntity;
+        Optional<StoreEntity> existingEntity = repo.findById(storeId);
+//        if (existingEntity == null) {
+//            throw new NoSuchElementException(String.format("Not found this store with this ID %s", storeId));
+//        }
+        return existingEntity.get();
     }
 }

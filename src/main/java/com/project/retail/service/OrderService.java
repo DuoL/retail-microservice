@@ -23,6 +23,12 @@ public class OrderService {
     private final StoreService storeService;
     private final ProductService productService;
 
+    /**
+     * Creates an order
+     *
+     * @param storeId to  create an order
+     * @return order created
+     */
     public Order create(OrderRequest orderRequest, Long storeId) {
         OrderEntity orderEntity = orderConverter.toEntity(orderRequest);
         setStoreEntity(orderEntity, storeId);
@@ -30,6 +36,11 @@ public class OrderService {
         return orderConverter.toDto(repo.save(orderEntity));
     }
 
+    /**
+     * Get an order by orderId
+     *
+     * @return order
+     */
     public Order getOrderById(Long orderId) {
         return orderConverter.toDto(getOrderEntityById(orderId));
     }
